@@ -1,0 +1,27 @@
+{
+  "devDependencies": {
+    "eslint": "^8.3.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-plugin-import": "^2.25.3"
+  },
+  "dependencies": {
+    "eslint-plugin-jest": "^25.3.0"
+  },
+  "name": "advent-of-code-2021",
+  "description": "",
+  "version": "1.0.0",
+  "main": ".eslintrc.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/apriljgranzow/advent-of-code-2021.git"
+  },
+  "author": "April Granzow",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/apriljgranzow/advent-of-code-2021/issues"
+  },
+  "homepage": "https://github.com/apriljgranzow/advent-of-code-2021#readme"
+}
