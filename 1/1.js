@@ -2,7 +2,7 @@ const fsPromises = require('fs/promises');
 
 const countIncreases = (array) => {
   let increases = 0;
-  for (let i = 0; i < array.length - 2; i += 1) {
+  for (let i = 0; i < array.length - 1; i += 1) {
     if (array[i + 1] > array[i]) {
       increases += 1;
     }

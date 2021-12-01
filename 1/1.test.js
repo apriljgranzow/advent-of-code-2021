@@ -1,7 +1,6 @@
 const day1 = require('./1');
 
-const example = `
-  199
+const example = `199
   200
   208
   210
