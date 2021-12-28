@@ -18,13 +18,13 @@ const gammaBit = function gammaBit(list, i) {
   let count0 = 0;
   let count1 = 0;
   list.forEach((string) => {
-    if (string.charAt(i) === 0) {
+    if (string.charAt(i) === '0') {
       count0 += 1;
     } else {
       count1 += 1;
     }
   });
-  return (count0 > count1 ? count0 : count1);
+  return (count0 > count1 ? 0 : 1);
 };
 
 /**
