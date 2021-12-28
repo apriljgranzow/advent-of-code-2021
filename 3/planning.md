@@ -33,3 +33,30 @@
 - Take the gamma rate and epsilon rate and convert them to base 10 integers using `parseInt`
 - multiply them together
 ⚠️ Note that `parseInt` takes the base you are converting FROM and always changes it to decimal.
+
+# Part 2
+## Problem Decomposition
+- Write a function that decodes 2 more diagnostics from your input:
+  - Oxygen generator rating
+  - CO2 scrubber rating
+- Both values are located using a similar process:
+  - Filtering out values until only one remains
+- Before searching for either value
+  - Consider just the first bit of each number
+    - Keep only numbers selected by the bit criteria for the specific value
+    - If you are left with just one number, return that
+    - Otherwise check the second bit of each number, and so on
+### Bit Criteria
+#### Oxygen Generator Rating
+- Most common value in the current bit position
+- Keep only numbers that have the common bit in that position
+
+#### CO2 Scrubber Rating
+- Least common value in the current bit position
+- Keep only numbers that have the least common bit in that position
+### Puzzle Solution:
+- Multiply the Oxygen Generator Rating and the CO2 Scrubber rating
+
+
+## Approach
+- Reuse functions `gammaBit` and `flipBit`

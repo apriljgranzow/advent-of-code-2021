@@ -41,8 +41,8 @@ const gammaRate = function gammaRate(list) {
   return result;
 };
 
-const epsilonRate = function epsilonRate(gammaRate) {
-  return gammaRate.map((bit) => flipBit(bit));
+const epsilonRate = function epsilonRate(gammaRating) {
+  return gammaRating.map((bit) => flipBit(bit));
 };
 
 /**
@@ -62,12 +62,38 @@ const part1 = function part1(list) {
   return gammaDecimal * epsilonDecimal;
 };
 
+const oxygenGeneratorRating = function oxygenGeneratorRating(list, i = 0) {
+  if (list.length === 1) {
+    return list[0];
+  }
+  const mostCommonValue = gammaBit(list, i);
+  const filtered = list.filter((string) => (string.charAt(i) === String(mostCommonValue)));
+  return oxygenGeneratorRating(filtered, i + 1);
+};
+
+const co2ScrubberRating = function co2ScrubberRating(list, i = 0) {
+  if (list.length === 1) {
+    return list[0];
+  }
+  const leastCommonValue = flipBit(gammaBit(list, i));
+  const filtered = list.filter((string) => (string.charAt(i) === String(leastCommonValue)));
+  return co2ScrubberRating(filtered, i + 1);
+};
+
+const part2 = function part2(list) {
+  const oxygenGenerator = oxygenGeneratorRating(list);
+  const co2Scrubber = co2ScrubberRating(list);
+  const oxygenDecimal = binaryToDecimal(oxygenGenerator);
+  const co2Decimal = binaryToDecimal(co2Scrubber);
+  return oxygenDecimal * co2Decimal;
+};
+
 // fsPromises.readFile('input.txt')
 //   .then((input) => (
 //     input
 //       .toString('utf8')
 //       .split('\n')
-//       .map((line) => line)
+//       // .map((line) => line)
 //   ))
 //   .then((input) => (console.log(part1(input))));
 
@@ -77,3 +103,5 @@ module.exports.gammaRate = gammaRate;
 module.exports.epsilonRate = epsilonRate;
 module.exports.binaryToDecimal = binaryToDecimal;
 module.exports.part1 = part1;
+module.exports.oxygenGeneratorRating = oxygenGeneratorRating;
+module.exports.co2ScrubberRating = co2ScrubberRating;

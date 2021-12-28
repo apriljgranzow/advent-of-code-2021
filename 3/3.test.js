@@ -35,4 +35,12 @@ describe('Example input', () => {
   test('Part one', () => {
     expect(day3.part1(example)).toBe(198);
   });
+  // Part 2
+  test('Oxygen Generator Rating', () => {
+    expect(day3.oxygenGeneratorRating(example)).toBe('10111');
+  });
+
+  test('CO2 Scrubber Rating', () => {
+    expect(day3.co2ScrubberRating(example)).toBe('01010');
+  });
 });
