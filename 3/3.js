@@ -88,14 +88,14 @@ const part2 = function part2(list) {
   return oxygenDecimal * co2Decimal;
 };
 
-// fsPromises.readFile('input.txt')
-//   .then((input) => (
-//     input
-//       .toString('utf8')
-//       .split('\n')
-//       // .map((line) => line)
-//   ))
-//   .then((input) => (console.log(part1(input))));
+fsPromises.readFile('input.txt')
+  .then((input) => (
+    input
+      .toString('utf8')
+      .split('\n')
+      // .map((line) => line)
+  ))
+  .then((input) => (console.log(part2(input))));
 
 module.exports.flipBit = flipBit;
 module.exports.gammaBit = gammaBit;
