@@ -32,3 +32,4 @@
   - Because there are only 2 options, if it's not the most, it's the least
 - Take the gamma rate and epsilon rate and convert them to base 10 integers using `parseInt`
 - multiply them together
+⚠️ Note that `parseInt` takes the base you are converting FROM and always changes it to decimal.

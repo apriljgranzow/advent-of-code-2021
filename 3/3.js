@@ -45,8 +45,21 @@ const epsilonRate = function epsilonRate(gammaRate) {
   return gammaRate.map((bit) => flipBit(bit));
 };
 
-const part1 = function part1(list) {
+/**
+ * Find the decimal given a binary string
+ * @param {string} binaryString - a number represented as a binary string
+ * @returns {number} decimal - a decimal number
+ */
+const binaryToDecimal = function binaryToDecimal(binaryString) {
+  return parseInt(binaryString, 2);
+};
 
+const part1 = function part1(list) {
+  const gamma = gammaRate(list);
+  const epsilon = epsilonRate(gamma);
+  const gammaDecimal = binaryToDecimal(gamma.join(''));
+  const epsilonDecimal = binaryToDecimal(epsilon.join(''));
+  return gammaDecimal * epsilonDecimal;
 };
 
 // fsPromises.readFile('input.txt')
@@ -61,4 +74,6 @@ const part1 = function part1(list) {
 module.exports.flipBit = flipBit;
 module.exports.gammaBit = gammaBit;
 module.exports.gammaRate = gammaRate;
+module.exports.epsilonRate = epsilonRate;
+module.exports.binaryToDecimal = binaryToDecimal;
 module.exports.part1 = part1;

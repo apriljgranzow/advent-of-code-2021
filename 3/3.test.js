@@ -5,6 +5,11 @@ test('Flip bit', () => {
   expect(day3.flipBit(1)).toBe(0);
 });
 
+test('Binary to decimal', () => {
+  expect(day3.binaryToDecimal('10110')).toBe(22);
+  expect(day3.binaryToDecimal('01001')).toBe(9);
+});
+
 describe('Example input', () => {
   const example = `00100
 11110
@@ -21,5 +26,13 @@ describe('Example input', () => {
 
   test('Gamma rate', () => {
     expect(day3.gammaRate(example).join('')).toBe('10110');
+  });
+
+  test('Epsilon rate', () => {
+    expect(day3.epsilonRate([1, 0, 1, 1, 0]).join('')).toBe('01001');
+  });
+
+  test('Part one', () => {
+    expect(day3.part1(example)).toBe(198);
   });
 });
