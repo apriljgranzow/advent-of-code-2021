@@ -43,4 +43,8 @@ describe('Example input', () => {
   test('CO2 Scrubber Rating', () => {
     expect(day3.co2ScrubberRating(example)).toBe('01010');
   });
+
+  test('Part two', () => {
+    expect(day3.part2(example)).toBe(230);
+  });
 });

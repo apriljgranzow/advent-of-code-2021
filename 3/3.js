@@ -105,3 +105,4 @@ module.exports.binaryToDecimal = binaryToDecimal;
 module.exports.part1 = part1;
 module.exports.oxygenGeneratorRating = oxygenGeneratorRating;
 module.exports.co2ScrubberRating = co2ScrubberRating;
+module.exports.part2 = part2;
