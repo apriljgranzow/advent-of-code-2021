@@ -1,11 +1,11 @@
 {
   "devDependencies": {
-    "eslint": "^8.3.0",
+    "eslint": "^8.5.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.3"
   },
   "dependencies": {
-    "eslint-plugin-jest": "^25.3.0"
+    "eslint-plugin-jest": "^25.3.2"
   },
   "name": "advent-of-code-2021",
   "description": "",
