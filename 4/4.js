@@ -61,6 +61,27 @@ const part1 = function part1(numbers, boards) {
   }
 };
 
+const part2 = function part2(numbers, boards) {
+  const bingoBoards = boards.map((board) => new BingoBoard(board));
+  const hasWon = new Map(); // map board number to whether it's won already
+  let lastWinningBoardNumber;
+  let lastWinningTurnNumber;
+  for (let i = 0; i < numbers.length; i += 1) {
+    for (let j = 0; j < bingoBoards.length; j += 1) {
+      bingoBoards[j].fill(numbers[i]);
+      if (i >= 5 && bingoBoards[j].isWinner()) {
+        if (!hasWon.has(j)) {
+          lastWinningBoardNumber = j;
+          lastWinningTurnNumber = i;
+          hasWon.set(j, true);
+        }
+      }
+    }
+  }
+  const calledSet = new Set(numbers.slice(0, lastWinningTurnNumber + 1));
+  return bingoBoards[lastWinningBoardNumber].score(calledSet, numbers[lastWinningTurnNumber]);
+};
+
 fsPromises.readFile('input.txt')
   .then((text) => {
     const lines = text.toString('utf8').split('\n\n');
@@ -76,5 +97,5 @@ fsPromises.readFile('input.txt')
         return rows;
       });
 
-    console.log(part1(callOrder, boards));
+    console.log(part2(callOrder, boards));
   });
