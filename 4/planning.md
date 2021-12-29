@@ -27,6 +27,7 @@ Find the winning board and its "score"
 N/A
 ## Edge Cases:
 - Assuming it's not possible for 2 boards to win at the same time
+- Assuming cards cannot have duplicates
 
 # Approach
 ## File processing
@@ -34,3 +35,10 @@ N/A
 - Take the first index and split by commas to get the numbers to call
 - The rest of the array will be strings representing boards
 - Split board strings by `\n` and then map over the elements and split by spaces
+
+## Finding the winning card
+We need an easy way to get the unmarked numbers to calculate the score.
+### BingoBoard class
+#### Properties
+  - numberMap converts numbers called to board positions
+  - filledMap tracks how many squares have been filled in for each row and column
