@@ -1,6 +1,6 @@
 const fsPromises = require('fs/promises');
 
-/** Take an array of boards and creates an array of Map objects. */
+/** Take a matrix and creates a map of values to row/col object literals. */
 const createBoardMap = function createBoardMaps(board) {
   const boardMap = new Map();
   board.forEach((row, rowIndex) => {
