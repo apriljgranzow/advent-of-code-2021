@@ -1,4 +1,3 @@
-const { count } = require('console');
 const fsPromises = require('fs/promises');
 
 /** Takes a text file containing line segments represented by pairs of pairs of coordinates
@@ -51,8 +50,56 @@ const part1 = function part1(lineSegments) {
   return [...coveredPoints.values()].reduce(countValuesMoreThan1, 0);
 };
 
+const isMajorDiagonal = function isMajorDiagonal(lineSegment) {
+  // major diagonals go from top left to bottom right
+  const [x1, y1, x2, y2] = lineSegment;
+  return (x1 > x2 && y1 > y2) || (x2 > x1 && y2 > y1);
+};
+
+const part2 = function part2(lineSegments) {
+  const coveredPoints = new Map();
+  lineSegments.forEach((lineSegment) => {
+    if (isVertical(lineSegment)) {
+      const [x1, y1, , y2] = lineSegment;
+      const [start, end] = y1 > y2 ? [y2, y1] : [y1, y2];
+      for (let y = start; y <= end; y += 1) {
+        const coordString = JSON.stringify([x1, y]);
+        const count = coveredPoints.has(coordString) ? coveredPoints.get(coordString) + 1 : 1;
+        coveredPoints.set(coordString, count);
+      }
+    } else if (isHorizontal(lineSegment)) {
+      const [x1, y1, x2] = lineSegment;
+      const [start, end] = x1 > x2 ? [x2, x1] : [x1, x2];
+      for (let x = start; x <= end; x += 1) {
+        const coordString = JSON.stringify([x, y1]);
+        const count = coveredPoints.has(coordString) ? coveredPoints.get(coordString) + 1 : 1;
+        coveredPoints.set(coordString, count);
+      }
+    } else if (isMajorDiagonal(lineSegment)) {
+      const [x1, y1, x2, y2] = lineSegment;
+      const [startX, endX] = x1 > x2 ? [x2, x1] : [x1, x2];
+      const startY = y1 > y2 ? y2 : y1;
+      for (let i = 0; startX + i <= endX; i += 1) {
+        const coordString = JSON.stringify([startX + i, startY + i]);
+        const count = coveredPoints.has(coordString) ? coveredPoints.get(coordString) + 1 : 1;
+        coveredPoints.set(coordString, count);
+      }
+    } else { // is minor diagonal
+      const [x1, y1, x2, y2] = lineSegment;
+      const [startX, endX] = x1 > x2 ? [x2, x1] : [x1, x2];
+      const startY = y1 > y2 ? y1 : y2;
+      for (let i = 0; startX + i <= endX; i += 1) {
+        const coordString = JSON.stringify([startX + i, startY - i]);
+        const count = coveredPoints.has(coordString) ? coveredPoints.get(coordString) + 1 : 1;
+        coveredPoints.set(coordString, count);
+      }
+    }
+  });
+  return [...coveredPoints.values()].reduce(countValuesMoreThan1, 0);
+};
+
 fsPromises.readFile('input.txt')
   .then((text) => {
     const lineSegments = processText(text.toString('utf8'));
-    console.log(part1(lineSegments));
+    console.log(part2(lineSegments));
   });

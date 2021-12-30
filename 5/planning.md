@@ -29,4 +29,11 @@ Edge cases: If line segment starts and ends on the same point, count it as 1 squ
     - add all of the line's points to the map
       - if point does not exist, set it to 1
       - otherwise get the existing count and set the point's value to count + 1
-      - 
+
+# Part 2
+- Additionally consider diagonal lines
+- diagonals will always be 45 degrees
+  - 1,1 -> 3,3 covers 1,1, 2,2, and 3,3
+- We need to handle major and minor diagonals
+  - Major diagonals increase x and y
+  - Minor diagonals increase x and decrease Y
