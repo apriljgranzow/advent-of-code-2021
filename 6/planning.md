@@ -23,3 +23,16 @@ Edge cases
       - change n to 6
     - otherwise decrement n by 1
   - push 8s to the array based on the number of new fish that were born this turn
+
+# Part 2
+- Increasing the number of turns makes mutating the array unfeasible due to the exponential growth
+- We can replace this with a Map
+## Procedure
+- Initialize timer counter map
+  - keys = integer value of timer
+  - value = integer number of timers that have that value
+- Go through the initial input and add all the timers to the map
+### Simulating turns
+- Iterate over each key
+- For keys 1 thru 8, swap their values down
+- For key 0, add its value to both 6 and 8
