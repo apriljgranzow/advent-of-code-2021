@@ -23,13 +23,13 @@ const syntaxErrorScore = function syntaxErrorScore(bracket) {
     ['}', 1197],
     ['>', 25137],
   ]);
+  return scoreTable.get(bracket);
 };
 
 /** Return the index of the first incorrect character, or -1 if noncorrupted
  * @param {string[]} line - a list of characters representing sets of brackets
- * @returns {number}
-*/
-const validateParens = function validateParens(line) {
+ * @returns {number} */
+const indexOfFirstCorrupted = function indexOfFirstCorrupted(line) {
   const stack = [];
   const openingBrackets = new Set(['(', '{', '[', '<']);
   // eslint-disable-next-line consistent-return
@@ -48,19 +48,27 @@ const validateParens = function validateParens(line) {
 };
 
 const part1 = function part1(lines) {
-
+  let errorScore = 0;
+  lines.forEach((line) => {
+    const errorIndex = indexOfFirstCorrupted(line);
+    if (errorIndex !== -1) {
+      errorScore += syntaxErrorScore(line[errorIndex]);
+    }
+  });
+  return errorScore;
 };
-console.log(validateParens([...'(]']));
-// fsPromises.readFile('input.txt')
-//   .then((text) => (
-//     text
-//       .toString('utf8')
-//       .split('\n')
-//       .map((line) => ([...line]))
-//   ))
-//   .then((input) => {
-//     console.log(part1(input));
-//   });
+// console.log(indexOfFirstCorrupted([...'(]']));
+fsPromises.readFile('input.txt')
+  .then((text) => (
+    text
+      .toString('utf8')
+      .split('\n')
+      .map((line) => ([...line]))
+  ))
+  .then((input) => {
+    // console.log(input);
+    console.log(part1(input));
+  });
 
 module.exports.isMatching = isMatching;
-module.exports.validateParens = validateParens;
+module.exports.indexOfFirstCorrupted = indexOfFirstCorrupted;

@@ -21,13 +21,13 @@ test('Valid sets of brackets should return -1', () => {
   ];
 
   validLines.forEach((line) => {
-    expect(day10.validateParens([...line])).toBe(-1);
+    expect(day10.indexOfFirstCorrupted([...line])).toBe(-1);
   });
 });
 
 test('Invalid sets of brackets should return the index of the first mismatched closing bracket', () => {
-  expect(day10.validateParens([...'(]'])).toBe(1);
-  expect(day10.validateParens([...'{()()()>'])).toBe(7);
-  expect(day10.validateParens([...'(((()))}'])).toBe(7);
-  expect(day10.validateParens([...'<([]){()}[{}])'])).toBe(13);
+  expect(day10.indexOfFirstCorrupted([...'(]'])).toBe(1);
+  expect(day10.indexOfFirstCorrupted([...'{()()()>'])).toBe(7);
+  expect(day10.indexOfFirstCorrupted([...'(((()))}'])).toBe(7);
+  expect(day10.indexOfFirstCorrupted([...'<([]){()}[{}])'])).toBe(13);
 });
