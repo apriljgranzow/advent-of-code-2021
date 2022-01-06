@@ -5,14 +5,20 @@ const bracketPairs = new Map([
   [')', '('],
   ['}', '{'],
   [']', '['],
+  ['<', '>'],
+  ['(', ')'],
+  ['{', '}'],
+  ['[', ']'],
 ]);
+
+const openingBrackets = new Set(['(', '{', '[', '<']);
 
 /** Given two brackets, return whether they are correctly paired
  * @param {string} rightBracket
  * @param {string} leftBracket
  */
-const isMatching = function isMatching(rightBracket, leftBracket) {
-  return (bracketPairs.get(rightBracket) === leftBracket);
+const isMatching = function isMatching(bracketA, bracketB) {
+  return (bracketPairs.get(bracketA) === bracketB);
 };
 
 /** Given a character, return its  */
@@ -31,7 +37,6 @@ const syntaxErrorScore = function syntaxErrorScore(bracket) {
  * @returns {number} */
 const indexOfFirstCorrupted = function indexOfFirstCorrupted(line) {
   const stack = [];
-  const openingBrackets = new Set(['(', '{', '[', '<']);
   // eslint-disable-next-line consistent-return
   for (let i = 0; i < line.length; i += 1) {
     if (openingBrackets.has(line[i])) {
@@ -57,8 +62,41 @@ const part1 = function part1(lines) {
   });
   return errorScore;
 };
-// console.log(indexOfFirstCorrupted([...'(]']));
-fsPromises.readFile('input.txt')
+
+const getCompletionString = function getCompletionString(line) {
+  const stack = [];
+  line.forEach((bracket) => {
+    if (openingBrackets.has(bracket)) {
+      stack.push(bracket);
+    } else {
+      const leftBracket = openingBracket.push();
+      if isMatching()
+    }
+  });
+};
+
+const scoreCompletionString = function scoreCompletionString(completionString) {
+  const scoreTable = new Map([
+    [')', 1],
+    [']', 2],
+    ['}', 3],
+    ['>', 4],
+  ]);
+  let score = 0;
+  [...completionString].forEach((char) => {
+    score *= 5;
+    score += scoreTable.get(char);
+  });
+};
+
+const part2 = function part2(lines) {
+  const scores = [];
+  lines.forEach((line) => {
+    
+  });
+};
+
+fsPromises.readFile('example.txt')
   .then((text) => (
     text
       .toString('utf8')
@@ -67,7 +105,7 @@ fsPromises.readFile('input.txt')
   ))
   .then((input) => {
     // console.log(input);
-    console.log(part1(input));
+    console.log((input));
   });
 
 module.exports.isMatching = isMatching;
