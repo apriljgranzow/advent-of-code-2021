@@ -39,3 +39,32 @@ Edge cases:
   - check if the opening character matches the closing character
     - if yes, move on
     - if no, look up the _closing character_ on the _score table_ and increment the total score accordingly
+
+# Part 2
+- Look at only the non-corrupted/incomplete lines
+- figure out the sequence of closing characters that complete all open chunks in the line
+## Scoring
+- For each line
+  - Take the _completion string_
+  - Start with a total of 0
+  - For each character
+    - multiply the total score by 5
+    - then increase the total score by the point value given from the following table:
+| Character | Points |
+| -- | -- |
+| ) | 1 |
+| ] | 2 |
+| } | 3 |
+| > | 4 |
+- The puzzle solution is found by sorting the scores for each line and returning the median
+- There will always be an odd number of scores
+
+# Procedure
+- Iterate over all lines
+- Do the same pair validation as with part 1
+- If corrupted, then move on,
+- Otherwise look at what remains on the stack
+- pop each opening bracket off the stack and add its corresponding closing bracket to the "completion string"
+- score the completion string
+- add the scores to an array
+- sort the score array and return the median
