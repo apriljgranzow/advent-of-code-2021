@@ -39,7 +39,7 @@ describe('Generating completion strings', () => {
     ['[(()[<>])]({[<{<<[]>>(', ')}>]})'],
     ['(((({<>}<{<{<>}{[]{[]{}', '}}>}>))))'],
     ['{<[[]]>}<{[{[{[]{()[[[]', ']]}}]}]}>'],
-    ['<{([{{}}[<[[[<>{}]]]>[]] ', '])}>'],
+    ['<{([{{}}[<[[[<>{}]]]>[]]', '])}>'],
   ];
   test('For an uncorrupted/incomplete line, it should return the exact sequence of brackets that would complete a valid line', () => {
     incompleteLines.forEach(([line, solution]) => {
