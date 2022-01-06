@@ -1,4 +1,6 @@
+const { match } = require('assert');
 const fsPromises = require('fs/promises');
+const { get } = require('http');
 
 const bracketPairs = new Map([
   ['>', '<'],
@@ -63,16 +65,27 @@ const part1 = function part1(lines) {
   return errorScore;
 };
 
-const getCompletionString = function getCompletionString(line) {
+const getCompletionString = function getCompletionString(brackets) {
   const stack = [];
-  line.forEach((bracket) => {
+  const closingBrackets = [];
+  if (brackets.every((bracket) => {
     if (openingBrackets.has(bracket)) {
       stack.push(bracket);
     } else {
-      const leftBracket = openingBracket.push();
-      if isMatching()
+      const leftBracket = stack.pop();
+      if (!isMatching(leftBracket, bracket)) {
+        return false;
+      }
     }
-  });
+    return true;
+  })) {
+    while (stack.length !== 0) {
+      const unmatchedLeft = stack.pop();
+      const matchingRight = bracketPairs.get(unmatchedLeft);
+      closingBrackets.push(matchingRight);
+    }
+  }
+  return closingBrackets.join('');
 };
 
 const scoreCompletionString = function scoreCompletionString(completionString) {
@@ -87,6 +100,7 @@ const scoreCompletionString = function scoreCompletionString(completionString) {
     score *= 5;
     score += scoreTable.get(char);
   });
+  return score;
 };
 
 const part2 = function part2(lines) {
@@ -96,17 +110,19 @@ const part2 = function part2(lines) {
   });
 };
 
-fsPromises.readFile('example.txt')
-  .then((text) => (
-    text
-      .toString('utf8')
-      .split('\n')
-      .map((line) => ([...line]))
-  ))
-  .then((input) => {
-    // console.log(input);
-    console.log((input));
-  });
+// fsPromises.readFile('example.txt')
+//   .then((text) => (
+//     text
+//       .toString('utf8')
+//       .split('\n')
+//       .map((line) => ([...line]))
+//   ))
+//   .then((input) => {
+//     // console.log(input);
+//     console.log((input));
+//   });
 
 module.exports.isMatching = isMatching;
 module.exports.indexOfFirstCorrupted = indexOfFirstCorrupted;
+module.exports.getCompletionString = getCompletionString;
+module.exports.scoreCompletionString = scoreCompletionString;

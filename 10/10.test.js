@@ -33,7 +33,7 @@ describe('Index of first corrupted bracket', () => {
   });
 });
 
-describe('Generating completion strings', () => {
+describe('Completion strings', () => {
   const incompleteLines = [
     ['[({(<(())[]>[[{[]{<()<>>', '}}]])})]'],
     ['[(()[<>])]({[<{<<[]>>(', ')}>]})'],
@@ -41,7 +41,7 @@ describe('Generating completion strings', () => {
     ['{<[[]]>}<{[{[{[]{()[[[]', ']]}}]}]}>'],
     ['<{([{{}}[<[[[<>{}]]]>[]]', '])}>'],
   ];
-  test('For an uncorrupted/incomplete line, it should return the exact sequence of brackets that would complete a valid line', () => {
+  test('For an uncorrupted/incomplete line, getCompletionString should return the exact sequence of brackets that would complete a valid line', () => {
     incompleteLines.forEach(([line, solution]) => {
       expect(day10.getCompletionString([...line])).toEqual(solution);
     });
@@ -54,9 +54,15 @@ describe('Generating completion strings', () => {
     '[<(<(<(<{}))><([]([]()',
     '<{([([[(<>()){}]>(<<{{',
   ];
-  test('For a corrupted line, it should return an empty string', () => {
+  test('For a corrupted line, getCompletionString should return an empty string', () => {
     corruptedLines.forEach((line) => {
       expect(day10.getCompletionString([...line])).toEqual('');
+    });
+  });
+  test('Scoring completion strings', () => {
+    const scores = [288957, 5566, 1480781, 995444, 294];
+    incompleteLines.forEach(([, solution], index) => {
+      expect(day10.scoreCompletionString(solution)).toEqual(scores[index]);
     });
   });
 });
