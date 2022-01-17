@@ -22,13 +22,16 @@ class Queue {
   }
 
   enqueue(value) {
-    this.storage.set(this.lastIndex + 1, value);
+    this.lastIndex += 1;
+    this.storage.set(this.lastIndex, value);
   }
 
   dequeue() {
     const result = this.storage.get(this.nextInLine);
-    this.storage.delete(this.nextInLine);
-    this.nextInLine += 1;
+    if (result !== undefined) {
+      this.storage.delete(this.nextInLine);
+      this.nextInLine += 1;
+    }
     return result;
   }
 
@@ -78,16 +81,24 @@ const part1 = function part1(matrix) {
   return simulate(matrix, 100);
 };
 
-fsPromises.readFile('example.txt')
-  .then((text) => (
-    text
-      .toString('utf8')
-      .split('\n')
-      .map((line) => ([...line])
-        .map((char) => (Number(char))))
-  ))
-  .then((matrix) => {
-    console.log(matrix.join('\n'));
-    console.log(simulateTurn(matrix));
-    console.log(matrix.join('\n'));
-  });
+const formatMatrixString = function formatMatrixString(matrixString) {
+  return matrixString
+    .split('\n')
+    .map((line) => ([...line])
+      .map((char) => (Number(char))));
+};
+
+// fsPromises.readFile('example.txt')
+//   .then((text) => (
+//     formatMatrixString(text.toString('utf8'))
+//   ))
+//   .then((matrix) => {
+//     console.log(matrix.join('\n'));
+//     console.log(simulateTurn(matrix));
+//     console.log(matrix.join('\n'));
+//   });
+module.exports.Queue = Queue;
+module.exports.formatMatrixString = formatMatrixString;
+module.exports.getNeighbors = getNeighbors;
+module.exports.simulate = simulate;
+module.exports.simulateTurn = simulateTurn;

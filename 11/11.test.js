@@ -1,5 +1,23 @@
 const day11 = require('./11');
 
+describe('Queue', () => {
+  let q;
+  beforeEach(() => {
+    q = new day11.Queue();
+  });
+  test('Dequeue from empty queue yields undefined', () => {
+    const result = q.dequeue();
+    expect(result).toBeUndefined;
+  });
+
+  test('Enqueue adds items to storage in FIFO order', () => {
+    q.enqueue(1);
+    q.enqueue(2);
+    const result = q.dequeue();
+    expect(result).toBe(1);
+  });
+});
+
 describe('Part 1', () => {
   const exampleSteps = [`5483143223
 2745854711
@@ -114,6 +132,7 @@ describe('Part 1', () => {
   test.each(exampleSteps)('Turn %#', (i, expected) => {
     const actual = day11.formatMatrixString(exampleSteps[0][1]);
     day11.simulate(actual, i);
+    expect(actual.length).toBe(day11.formatMatrixString(expected).length);
     expect(actual).toEqual(day11.formatMatrixString(expected));
   });
 });
